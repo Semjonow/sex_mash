@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :detect_location
+  before_filter :location_request
 
   def remote_ip
     if Rails.env.development?
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def detect_location
+  def location_request
     session['location'] ||= current_user.post_location(remote_ip) if user_signed_in?
   end
 end

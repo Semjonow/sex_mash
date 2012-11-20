@@ -22,8 +22,6 @@ class Location < ActiveRecord::Base
         self.country = c['long_name']
       elsif c['types'].include? 'locality'
         self.city = c['long_name']
-      elsif c['types'].include? 'administrative_area_level_1'
-        self.state = c['long_name']
       end
     end
   end

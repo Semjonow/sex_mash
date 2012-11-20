@@ -3,7 +3,6 @@ class CreateLocations < ActiveRecord::Migration
     create_table :locations do |t|
       t.integer :user_id
       t.string  :country, null: false, default: ''
-      t.string  :state,   null: false, default: ''
       t.string  :city,    null: false, default: ''
       t.string  :address, null: false, default: ''
       t.float   :lat,     null: false, default: 0.0

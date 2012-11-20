@@ -23,9 +23,9 @@ class User < ActiveRecord::Base
     geo_data = graph.get_object('me', fields: 'location')['location']
     user_location.address = geo_data['name'] if geo_data.present?
 
-    if !user_location.present? && ip_address.present?
+    if !user_location.address.present? && ip_address.present?
       geo_data = Geokit::Geocoders::MultiGeocoder.geocode(ip_address)
-      user_location.address = "#{geo_data.state}, #{geo_data.city}" if geo_data.success
+      user_location.address = geo_data.full_address if geo_data.success
     end
 
     return user_location.save if user_location.address.present?

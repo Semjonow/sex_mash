@@ -32,6 +32,13 @@ class User < ActiveRecord::Base
     false
   end
 
+  def post_to_feed(message=nil)
+    begin
+      graph.put_connections('me', 'feed', message: message) if message.present?
+    rescue
+    end
+  end
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     user_hash = {

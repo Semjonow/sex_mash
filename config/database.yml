@@ -1,0 +1,25 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: sex_mash_development
+  pool: 5
+  username: sex_mash
+  password: sex_mash696
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: sex_mash_test
+  pool: 5
+  username: sex_mash
+  password: sex_mash696
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: sex_mash_production
+  pool: 5
+  username: sex_mash
+  password:

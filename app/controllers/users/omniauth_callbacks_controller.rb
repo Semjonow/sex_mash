@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  after_filter :run_photos_worker, only: [:facebook]
+
   def facebook
     @user = User.find_for_facebook_oauth(request.env['omniauth.auth'], current_user)
 
@@ -9,5 +11,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session['devise.facebook_data'] = request.env['omniauth.auth']
       redirect_to root_path
     end
+  end
+
+  protected
+
+  def run_photos_worker
+    PhotosWorker.perform_async(current_user.id)
   end
 end

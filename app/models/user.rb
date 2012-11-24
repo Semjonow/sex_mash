@@ -1,20 +1,39 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :username, use: :slugged
+
   devise :database_authenticatable, :encryptable, :omniauthable
 
   attr_accessible :username, :provider, :uid, :access_token, :email
 
   @graph = false
 
-  has_one :profile
-  has_one :location
+  has_one  :profile
+  has_one  :location
+  has_many :photos
 
-  validates :email,              presence: true, uniqueness: true
-  validates :username,           presence: true, uniqueness: true
-  validates :uid,                presence: true, :uniqueness => { scope: [:provider] }
-  validates :provider,           presence: true
+  validates :email,    presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true
+  validates :uid,      presence: true, :uniqueness => { scope: [:provider] }
+  validates :provider, presence: true
 
   def graph
     @graph ||= Koala::Facebook::API.new(self.access_token)
+  end
+
+  def get_photos
+    result = graph.fql_query('SELECT pid,
+                                     src_big,
+                                     src_small FROM photo WHERE owner = me()')
+    photo_ids = []
+    Photo.transaction do
+      result.each do |photo_attr|
+        photo = Photo.find_by_pid(photo_attr[:pid])
+        photo.nil? ? photo = self.photos.create(photo_attr) : photo.update_attributes(photo_attr)
+        photo_ids << photo.pid
+      end
+      Photo.where('user_id = ? AND pid NOT IN (?)', self.id, photo_ids).delete_all
+    end
   end
 
   def post_location(ip_address=nil)

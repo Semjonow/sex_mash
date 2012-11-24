@@ -10,11 +10,14 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :uid,          null: false, default: ''
       t.string :access_token, null: false, default: ''
 
+      t.string :slug, null: false, default: ''
+
       t.timestamps
     end
 
     add_index :users, :email,            unique: true
     add_index :users, :username,         unique: true
     add_index :users, [:provider, :uid], unique: true
+    add_index :users, :slug,             unique: true
   end
 end

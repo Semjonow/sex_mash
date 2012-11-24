@@ -8,8 +8,9 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier'
   gem 'yui-compressor'
-  gem 'bootswatch-rails'
-  gem 'bootstrap-sass'
+  gem 'compass-rails'
+  gem 'zurb-foundation'
+  gem 'foundation-icons-sass-rails'
 end
 
 group :development do
@@ -30,3 +31,5 @@ gem 'haml-rails'
 gem 'validates_timeliness'
 gem 'gmaps4rails'
 gem 'geokit-rails3'
+gem 'friendly_id'
+gem 'sidekiq'

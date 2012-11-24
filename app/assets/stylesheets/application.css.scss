@@ -1,9 +1,4 @@
-@import "bootswatch/spacelab/variables";
-@import "bootstrap";
-
-body { padding-top: 60px; }
-
-@import "bootstrap-responsive";
-@import "bootswatch/spacelab/bootswatch";
+@import "foundation";
+@import 'foundation-icons';
 @import "gmaps4rails";
 @import "main";

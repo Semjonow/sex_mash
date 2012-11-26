@@ -9,4 +9,9 @@ class Profile < ActiveRecord::Base
 
   validates_date :birthday, before:         lambda { 18.years.ago },
                             before_message: 'must be at least 18 years old'
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - self.birthday.year - (self.birthday.to_date.change(:year => now.year) > now ? 1 : 0)
+  end
 end

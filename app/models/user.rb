@@ -52,10 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def post_to_feed(message=nil)
-    begin
-      graph.put_connections('me', 'feed', message: message) if message.present?
-    rescue
-    end
+    graph.put_connections('me', 'feed', message: message) if message.present?
   end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)

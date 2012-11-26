@@ -2,6 +2,7 @@ SexMash::Application.routes.draw do
   scope 'users' do
     match ''       => 'users/settings#edit',   as: :edit_user
     match 'update' => 'users/settings#update', as: :user_path, via: :put
+    match ':id'    => 'main#show', as: :user
   end
 
   devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks' }

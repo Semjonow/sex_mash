@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123234907) do
+ActiveRecord::Schema.define(:version => 20121128225031) do
 
   create_table "locations", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(:version => 20121123234907) do
     t.boolean  "gmaps",      :default => false, :null => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "reciever_id"
+    t.string   "subject",     :default => "", :null => false
+    t.string   "body",        :default => "", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "photos", :force => true do |t|
@@ -66,6 +75,9 @@ ActiveRecord::Schema.define(:version => 20121123234907) do
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   add_foreign_key "locations", "users", :name => "locations_user_id_fk", :dependent => :delete
+
+  add_foreign_key "messages", "users", :name => "messages_reciever_id_fk", :column => "reciever_id", :dependent => :delete
+  add_foreign_key "messages", "users", :name => "messages_sender_id_fk", :column => "sender_id", :dependent => :delete
 
   add_foreign_key "photos", "users", :name => "photos_user_id_fk", :dependent => :delete
 

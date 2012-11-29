@@ -201,6 +201,9 @@ GEM
       timeliness (~> 0.3.6)
     warden (1.2.1)
       rack (>= 1.0)
+    xmpp4r (0.5)
+    xmpp4r_facebook (0.1.1)
+      xmpp4r
     yui-compressor (0.9.6)
       POpen4 (>= 0.1.4)
     zurb-foundation (3.2.2)
@@ -237,5 +240,6 @@ DEPENDENCIES
   thin
   uglifier
   validates_timeliness
+  xmpp4r_facebook
   yui-compressor
   zurb-foundation

@@ -18,5 +18,5 @@ Devise.setup do |config|
 
   config.omniauth :facebook, '418049088248783', '273369d5f5e4c5ae7add677ee0e4e59b',
                   :client_options => {:ssl => { ca_path: '/etc/ssl/certs' }},
-                  :scope          => 'publish_stream,manage_friendlists,user_photos,user_birthday,user_location,email'
+                  :scope          => 'publish_stream,xmpp_login,user_photos,user_birthday,user_location,email'
 end

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_one  :profile
   has_one  :location
   has_many :photos
+  has_many :sent_messages,     class_name: 'Message', foreign_key: 'sender_id'
+  has_many :recieved_messages, class_name: 'Message', foreign_key: 'reciever_id'
 
   validates :email,    presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true

@@ -10,9 +10,12 @@
     = gmaps('markers' => { data: @location.to_gmaps4rails },
             'map_options' => { 'auto_zoom' => false, 'zoom' => 15})
   .eight.columns
-    = link_to "http://www.facebook.com/dialog/friends/?id=#{@user.username}&app_id=418049088248783&redirect_uri=#{request.protocol}#{request.host_with_port}#{request.fullpath}", class: 'success round large button' do
+    = link_to "http://www.facebook.com/dialog/friends/?id=#{@user.username}&app_id=418049088248783&redirect_uri=#{request.protocol}#{request.host_with_port}#{request.fullpath}", class: 'success round button' do
       %i.general.foundicon-heart
       Add me as a friend
+    %br/
+    %br/
+    #new-message-form-container= render 'messages/form', user: @user
 %br/
 #user-photos-container.panel.radius.twelve.columns
   %ul.block-grid{ 'data-clearing' => '' }= render @photos

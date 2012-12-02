@@ -1,0 +1,11 @@
+= form_for :message,
+           url:     messages_path(user),
+           method: :post,
+           remote: true do |f|
+  %fieldset
+    = f.text_area :body, rows: '2'
+    %button{ type: :submit, class: 'button' }
+      %i.social.foundicon-facebook{ style: 'position:relative;top:2px;' }
+      SEND
+    %br/
+    %br/

@@ -1,4 +1,9 @@
 SexMash::Application.routes.draw do
+
+  scope ':reciever_id' do
+    resources :messages, only: [:new, :create]
+  end
+
   scope 'users' do
     match ''       => 'users/settings#edit',   as: :edit_user
     match 'update' => 'users/settings#update', as: :user_path, via: :put
